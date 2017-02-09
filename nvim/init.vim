@@ -25,7 +25,8 @@ call dein#add('w0ng/vim-hybrid')
 call dein#add('scrooloose/syntastic')
 call dein#add('neomake/neomake')
 call dein#add('mhinz/vim-signify')
-" call dein#add('vim-airline/vim-airline')
+call dein#add('vim-airline/vim-airline')
+call dein#add('leafgarland/typescript-vim')
 " call dein#add('vim-airline/vim-airline-themes')
 " call dein#add('Valloric/YouCompleteMe')
 
@@ -64,10 +65,42 @@ set number
 set cursorline
 
 " Air-line
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
 
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
+" if !exists('g:airline_symbols')
+"    let g:airline_symbols = {}
+" endif
 
-let g:airline_theme='hybrid'
+" let g:airline_theme='hybrid'
+
+
+" Nerdtree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+map <C-n> :NERDTreeToggle<CR>
+
+" Close nerdtree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+" Tabs shortcuts
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
+nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
+
+" Split nav
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+set clipboard+=unnamedplus
+
+setlocal spell spelllang=ru_ru,en_us
+
+set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl;'zxcvbnm,.~QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>
+
